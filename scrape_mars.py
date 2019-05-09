@@ -91,5 +91,6 @@ def scrape():
         # adding the dictionary to the list
         hemisphere_image_urls.append({'Title':title, "URL": final_url})
 
-    hemisphere_image_urls
+    all_of_mars["images"] = hemisphere_image_urls
+
     return all_of_mars
