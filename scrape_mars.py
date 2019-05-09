@@ -49,5 +49,47 @@ def scrape():
     soup = BeautifulSoup(html, "html.parser")
 
     all_of_mars["weather"] = soup.find('p', class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text.strip().split("hPapic.twitter.com/8SrPjAhpGZ")[0]
+
+    # mars facts 
+    url = ('https://space-facts.com/mars/')
+    raw_table = pd.read_html(url)
     
+    mars_facts_df = raw_table[0]
+    mars_facts_df.columns = ['Parameters', 'Values']
+
+    html_mars_table = mars_facts_df.to_html()
+    
+    all_of_mars["facts"] = html_mars_table
+    
+    # Scrape the images 
+    url = "https://astrogeology.usgs.gov/search/results?q=hemisphere+enhanced&k1=target&v1=Mars"
+    browser.visit(url)
+
+    html = browser.html
+    soup = BeautifulSoup(html, 'html.parser')
+    
+    hemisphere_image_urls = []
+    results = soup.find_all('div', class_ = 'item')
+
+    base_url = 'https://astrogeology.usgs.gov/'
+
+    for result in results:
+        title = result.find('h3').text
+        
+        # point to the link for the next page
+        link = result.find('a', class_='itemLink')['href']
+        
+        # need to tell bowser to go to the link
+        browser.visit(base_url + link)
+        html = browser.html  # reads an html
+        soup = BeautifulSoup(html, 'html.parser')
+        
+        #grabbing the whole img url
+        img_url = soup.find('img', class_='wide-image')['src']
+        final_url = base_url + img_url
+        
+        # adding the dictionary to the list
+        hemisphere_image_urls.append({'Title':title, "URL": final_url})
+
+    hemisphere_image_urls
     return all_of_mars
