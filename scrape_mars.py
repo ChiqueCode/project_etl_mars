@@ -2,6 +2,7 @@
 from splinter import Browser
 from bs4 import BeautifulSoup
 import time
+import pandas as pd
 
 # init the browser before scraping 
 def init_browser():
