@@ -93,5 +93,6 @@ def scrape():
         hemisphere_image_urls.append({'Title':title, "URL": final_url})
 
     all_of_mars["images"] = hemisphere_image_urls
+    print(hemisphere_image_urls)
 
     return all_of_mars

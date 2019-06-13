@@ -29,9 +29,10 @@
           <img src="{{ all_of_mars.featured_image_url }}", alt="Mars Featured Image" class="img-responsive">
         </div>
         <div class="col-md-4">
-            <h5 class="heading">{{all_of_mars.weather}}</h5>
-            <h6> Mars Facts: </h6>
-            <p> {{all_of_mars.facts </p>
+            <h5> Mars Weather </h5>
+            <h6 class="heading">{{all_of_mars.weather}}</h6>
+            <h7> Mars Facts: </h7>
+            <p> {{all_of_mars.facts | safe }} </p>
 
         </div> 
     </div>     
@@ -39,7 +40,7 @@
       <h2><center> Mars Hemispheres: </h2></center>
       <div class="row">
         <div class="col-md-6">
-          {% for hemisphere in mars["hemispheres"] %}
+          {% for hemisphere in all_of_mars["hemispheres"] %}
            <img src="{{ hemisphere_image_urls.URL}}" alt="..." class="center"> 
            <center><h3>{{ hemisphere_image_urls.Title }}</h3></center> 
           {% endfor %}
