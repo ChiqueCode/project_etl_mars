@@ -3,6 +3,7 @@ from splinter import Browser
 from bs4 import BeautifulSoup
 import time
 import pandas as pd
+import pprint
 
 # init the browser before scraping 
 def init_browser():
@@ -13,7 +14,7 @@ def scrape():
     browser = init_browser()
     all_of_mars = {}
 
-# scrape the news and title 
+    # scrape the news and title 
     url ='https://mars.nasa.gov/news/'
     browser.visit(url)
     
@@ -73,9 +74,11 @@ def scrape():
     results = soup.find_all('div', class_ = 'item')
 
     base_url = 'https://astrogeology.usgs.gov/'
+    pprint.PrettyPrinter(indent=4).pprint("results: " + str(results))
 
     for result in results:
         title = result.find('h3').text
+        print(title);
         
         # point to the link for the next page
         link = result.find('a', class_='itemLink')['href']

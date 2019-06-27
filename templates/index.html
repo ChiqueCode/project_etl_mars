@@ -40,9 +40,9 @@
       <h2><center> Mars Hemispheres: </h2></center>
       <div class="row">
         <div class="col-md-6">
-          {% for hemisphere in all_of_mars["hemispheres"] %}
-           <img src="{{ hemisphere_image_urls.URL}}" alt="..." class="center"> 
-           <center><h3>{{ hemisphere_image_urls.Title }}</h3></center> 
+          {% for hemisphere in all_of_mars["images"] %}
+           <img src="{{ hemisphere['URL'] }}" alt="..." class="center"> 
+           <center><h3>{{ hemisphere_image_urls }}</h3></center> 
           {% endfor %}
 
     </div>
